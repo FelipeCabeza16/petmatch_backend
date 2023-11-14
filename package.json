@@ -1,0 +1,25 @@
+{
+  "name": "petmatch_backend",
+  "version": "0.0.1",
+  "description": "Petmatch node backend",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FelipeCabeza16/petmatch_backend.git"
+  },
+  "keywords": [
+    "petmatch",
+    "pets",
+    "dogs",
+    "match"
+  ],
+  "author": "Andrés Felipe Cabeza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FelipeCabeza16/petmatch_backend/issues"
+  },
+  "homepage": "https://github.com/FelipeCabeza16/petmatch_backend#readme"
+}
