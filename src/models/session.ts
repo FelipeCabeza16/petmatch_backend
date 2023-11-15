@@ -46,85 +46,89 @@ export class session extends Model<sessionAttributes, sessionCreationAttributes>
 
   static initModel(sequelize: Sequelize.Sequelize): typeof session {
     return session.init({
-    id_session: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    latitude: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    longitude: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      defaultValue: 1
-    },
-    pet_session: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'pet',
-        key: 'id_pet'
-      }
-    },
-    last_connection: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    device_session: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'device',
-        key: 'id_device'
-      }
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'session',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_session" },
-        ]
+      id_session: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "fk_session_pet1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "pet_session" },
-        ]
+      latitude: {
+        type: DataTypes.STRING(100),
+        allowNull: true
       },
-      {
-        name: "fk_session_device1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "device_session" },
-        ]
+      longitude: {
+        type: DataTypes.STRING(100),
+        allowNull: true
       },
-    ]
-  });
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        defaultValue: 1
+      },
+      pet_session: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'pet',
+          key: 'id_pet'
+        }
+      },
+      last_connection: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      device_session: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'device',
+          key: 'id_device'
+        }
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    }, {
+      sequelize,
+      tableName: 'session',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_session" },
+          ]
+        },
+        {
+          name: "fk_session_pet1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "pet_session" },
+          ]
+        },
+        {
+          name: "fk_session_device1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "device_session" },
+          ]
+        },
+      ]
+    });
   }
 }

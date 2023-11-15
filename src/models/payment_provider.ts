@@ -41,58 +41,62 @@ export class payment_provider extends Model<payment_providerAttributes, payment_
 
   static initModel(sequelize: Sequelize.Sequelize): typeof payment_provider {
     return payment_provider.init({
-    id_payment_provider: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    payment_provider: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      unique: "breed_UNIQUE"
-    },
-    description: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'payment_provider',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_payment_provider" },
-        ]
+      id_payment_provider: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "breed_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "payment_provider" },
-        ]
+      payment_provider: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: "breed_UNIQUE"
       },
-    ]
-  });
+      description: {
+        type: DataTypes.STRING(45),
+        allowNull: true
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    }, {
+      sequelize,
+      tableName: 'payment_provider',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_payment_provider" },
+          ]
+        },
+        {
+          name: "breed_UNIQUE",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "payment_provider" },
+          ]
+        },
+      ]
+    });
   }
 }

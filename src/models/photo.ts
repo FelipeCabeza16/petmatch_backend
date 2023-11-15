@@ -42,79 +42,80 @@ export class photo extends Model<photoAttributes, photoCreationAttributes> imple
 
   static initModel(sequelize: Sequelize.Sequelize): typeof photo {
     return photo.init({
-    id_photo: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    url: {
-      type: DataTypes.STRING(800),
-      allowNull: false
-    },
-    user_photo: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'user',
-        key: 'id_user'
-      }
-    },
-    pet_photo: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'pet',
-        key: 'id_pet'
-      }
-    },
-    description: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'photo',
-    timestamps: false,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_photo" },
-        ]
+      id_photo: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "fk_photo_owner1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "user_photo" },
-        ]
+      url: {
+        type: DataTypes.STRING(800),
+        allowNull: false
       },
-      {
-        name: "fk_photo_pet1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "pet_photo" },
-        ]
+      user_photo: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'user',
+          key: 'id_user'
+        }
       },
-    ]
-  });
+      pet_photo: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'pet',
+          key: 'id_pet'
+        }
+      },
+      description: {
+        type: DataTypes.STRING(500),
+        allowNull: true
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+    
+    }, {
+      sequelize,
+      tableName: 'photo',
+      timestamps: false,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_photo" },
+          ]
+        },
+        {
+          name: "fk_photo_owner1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "user_photo" },
+          ]
+        },
+        {
+          name: "fk_photo_pet1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "pet_photo" },
+          ]
+        },
+      ]
+    });
   }
 }

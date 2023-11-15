@@ -171,80 +171,84 @@ export class pet extends Model<petAttributes, petCreationAttributes> implements 
 
   static initModel(sequelize: Sequelize.Sequelize): typeof pet {
     return pet.init({
-    id_pet: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    user_pet: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'user',
-        key: 'id_user'
-      }
-    },
-    name: {
-      type: DataTypes.STRING(100),
-      allowNull: false
-    },
-    gender: {
-      type: DataTypes.STRING(1),
-      allowNull: false
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      defaultValue: 1
-    },
-    breed_pet: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'breed',
-        key: 'id_breed'
-      }
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'pet',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_pet" },
-        ]
+      id_pet: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "fk_pet_owner_idx",
-        using: "BTREE",
-        fields: [
-          { name: "user_pet" },
-        ]
+      user_pet: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id_user'
+        }
       },
-      {
-        name: "fk_pet_breed1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "breed_pet" },
-        ]
+      name: {
+        type: DataTypes.STRING(100),
+        allowNull: false
       },
-    ]
-  });
+      gender: {
+        type: DataTypes.STRING(1),
+        allowNull: false
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        defaultValue: 1
+      },
+      breed_pet: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'breed',
+          key: 'id_breed'
+        }
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    }, {
+      sequelize,
+      tableName: 'pet',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_pet" },
+          ]
+        },
+        {
+          name: "fk_pet_owner_idx",
+          using: "BTREE",
+          fields: [
+            { name: "user_pet" },
+          ]
+        },
+        {
+          name: "fk_pet_breed1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "breed_pet" },
+          ]
+        },
+      ]
+    });
   }
 }

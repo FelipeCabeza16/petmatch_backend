@@ -60,74 +60,78 @@ export class subscription_configuration extends Model<subscription_configuration
 
   static initModel(sequelize: Sequelize.Sequelize): typeof subscription_configuration {
     return subscription_configuration.init({
-    id_subscription_configuration: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    discount_percentaje_monthly: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-      defaultValue: 0,
-      unique: "breed_UNIQUE"
-    },
-    description: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    monthly_susbcription: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    yearly_subscription: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    discount_percentaje_yearly: {
-      type: DataTypes.DOUBLE,
-      allowNull: true,
-      defaultValue: 0.1
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'subscription_configuration',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_subscription_configuration" },
-        ]
+      id_subscription_configuration: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "breed_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "discount_percentaje_monthly" },
-        ]
+      discount_percentaje_monthly: {
+        type: DataTypes.DOUBLE,
+        allowNull: false,
+        defaultValue: 0,
+        unique: "breed_UNIQUE"
       },
-    ]
-  });
+      description: {
+        type: DataTypes.STRING(45),
+        allowNull: true
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      monthly_susbcription: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      yearly_subscription: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      discount_percentaje_yearly: {
+        type: DataTypes.DOUBLE,
+        allowNull: true,
+        defaultValue: 0.1
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    }, {
+      sequelize,
+      tableName: 'subscription_configuration',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_subscription_configuration" },
+          ]
+        },
+        {
+          name: "breed_UNIQUE",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "discount_percentaje_monthly" },
+          ]
+        },
+      ]
+    });
   }
 }

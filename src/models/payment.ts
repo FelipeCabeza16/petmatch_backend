@@ -109,6 +109,10 @@ export class payment extends Model<paymentAttributes, paymentCreationAttributes>
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'payment',

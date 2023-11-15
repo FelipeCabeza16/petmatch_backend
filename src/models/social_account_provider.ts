@@ -84,6 +84,10 @@ export class social_account_provider extends Model<social_account_providerAttrib
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'social_account_provider',

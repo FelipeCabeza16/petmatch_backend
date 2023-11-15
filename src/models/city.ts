@@ -86,6 +86,10 @@ export class city extends Model<cityAttributes, cityCreationAttributes> implemen
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'city',

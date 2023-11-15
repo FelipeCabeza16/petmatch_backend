@@ -49,75 +49,79 @@ export class country extends Model<countryAttributes, countryCreationAttributes>
 
   static initModel(sequelize: Sequelize.Sequelize): typeof country {
     return country.init({
-    id_country: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    iso: {
-      type: DataTypes.STRING(10),
-      allowNull: true
-    },
-    country: {
-      type: DataTypes.STRING(300),
-      allowNull: false
-    },
-    iso3: {
-      type: DataTypes.STRING(4),
-      allowNull: true,
-      unique: "iso3_UNIQUE"
-    },
-    description: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      defaultValue: 1
-    },
-    num_code: {
-      type: DataTypes.STRING(10),
-      allowNull: true
-    },
-    phone_code: {
-      type: DataTypes.STRING(10),
-      allowNull: true
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'country',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_country" },
-        ]
+      id_country: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "iso3_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "iso3" },
-        ]
+      iso: {
+        type: DataTypes.STRING(10),
+        allowNull: true
       },
-    ]
-  });
+      country: {
+        type: DataTypes.STRING(300),
+        allowNull: false
+      },
+      iso3: {
+        type: DataTypes.STRING(4),
+        allowNull: true,
+        unique: "iso3_UNIQUE"
+      },
+      description: {
+        type: DataTypes.STRING(500),
+        allowNull: true
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        defaultValue: 1
+      },
+      num_code: {
+        type: DataTypes.STRING(10),
+        allowNull: true
+      },
+      phone_code: {
+        type: DataTypes.STRING(10),
+        allowNull: true
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    }, {
+      sequelize,
+      tableName: 'country',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_country" },
+          ]
+        },
+        {
+          name: "iso3_UNIQUE",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "iso3" },
+          ]
+        },
+      ]
+    });
   }
 }

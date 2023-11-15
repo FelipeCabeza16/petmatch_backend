@@ -58,6 +58,10 @@ export class configuration extends Model<configurationAttributes, configurationC
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'configuration',

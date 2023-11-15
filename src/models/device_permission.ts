@@ -54,59 +54,63 @@ export class device_permission extends Model<device_permissionAttributes, device
 
   static initModel(sequelize: Sequelize.Sequelize): typeof device_permission {
     return device_permission.init({
-    id_device_permission: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    device_permission: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      unique: "breed_UNIQUE"
-    },
-    description: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'device_permission',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_device_permission" },
-        ]
+      id_device_permission: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "breed_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "device_permission" },
-        ]
+      device_permission: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: "breed_UNIQUE"
       },
-    ]
-  });
+      description: {
+        type: DataTypes.STRING(500),
+        allowNull: true
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    }, {
+      sequelize,
+      tableName: 'device_permission',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_device_permission" },
+          ]
+        },
+        {
+          name: "breed_UNIQUE",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "device_permission" },
+          ]
+        },
+      ]
+    });
   }
 }

@@ -9,6 +9,9 @@ import { logger } from "../config/logs/log_config";
 import { expressLogger } from "../middleware/logs";
 import { log } from '../models/log';
 import { pushLog } from "../helpers/logs";
+import { getDefaultUserRole } from "../helpers/role";
+import { createDocumentFromJSON } from "../helpers/document";
+import { getDefaultUserSubscription } from "../helpers/subscription";
 
 
 // Init Models
@@ -274,6 +277,8 @@ export async function registerUser(req: Request, res: Response): Promise<void> {
         // 3. REGISTER USER IF ERROR DELETE
         // 4. REGISTER ADDRESS IF ERROR DELETE
 
+        console.log(req.body.address.address_city)
+
         const documentData = req.body.document;
         const addressData = req.body.address;
         const userData = req.body.user;
@@ -285,42 +290,51 @@ export async function registerUser(req: Request, res: Response): Promise<void> {
         }
 
         // 1. REGISTER DOCUMENT IF ERROR DELETE
+        
+
         try {
-            const documentQuery = await document.create(documentData);
+            const documentQuery = await createDocumentFromJSON(documentData);
+            if (!documentQuery) {
+                throw new Error('No se pudo registrar el documento')
+            }
             // 2. GET CONSULTA EXTERNA OR DEFAULT ROLE
             try {
-                const consultaExternaRole = await role.findOne({
-                    where: {
-                        role: 'CONSULTA EXTERNA',
-                        is_active: true,
-                        deleted_at: null
-                    }
-                });
-
-                if (!consultaExternaRole) {
-                    throw new Error('No existe el rol de consulta externa')
+                const defaultUserRole = await getDefaultUserRole();
+                if (!defaultUserRole) {
+                    throw new Error('Error registrando al usuario, por favor intenta de nuevo')
                 }
+
+                // GET FREEMIUM SUBSCRIPTION
+                const defaultUserSubscription = await getDefaultUserSubscription();
+                if (!defaultUserSubscription) {
+                    throw new Error('Error registrando al usuario, por favor intenta de nuevo')
+                }
+
 
                 // 3. REGISTER USER IF ERROR DELETE
                 try {
                     const userQuery = await user.create({
                         ...userData,
-                        role_user: consultaExternaRole.id_role,
-                        document_document: documentQuery.id_document
+                        role_user: defaultUserRole.id_role,
+                        document_user: documentQuery.id_document,
+                        subscription_user: defaultUserSubscription.id_subscription
+
                     });
                     // 4. REGISTER ADDRESS IF ERROR DELETE
                     try {
                         const getIDDefaultCity = await city.findOne({
                             where: {
-                                city: 'BOGOTA',
+                                id_city: addressData.address_city,
                                 is_active: true,
                                 deleted_at: null
                             }
                         });
+
+
                         const addressQuery = await address.create({
                             ...addressData,
-                            address_city: getIDDefaultCity.id_city,
-                            address_user: userQuery.id_user
+                            city_address: getIDDefaultCity.id_city,
+                            user_address: userQuery.id_user
                         });
                         if (addressQuery) {
                             res.status(201).json({
@@ -403,9 +417,6 @@ export async function loginUser(req: Request, res: Response): Promise<void> {
                 [Op.or]: [
                     { email: username },
                     { phone: username },
-                    {
-                        '$user_document_document.document$': username
-                    }
                 ],
                 is_active: true,
                 deleted_at: null
@@ -471,7 +482,7 @@ export async function getUserProfile(req: Request, res: Response): Promise<void>
             include: [
                 {
                     model: document,
-                    as: 'user_document_document',
+                    as: 'document_user_document',
                     include: [
                         {
                             model: document_type,

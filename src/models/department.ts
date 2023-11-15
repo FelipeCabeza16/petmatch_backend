@@ -87,6 +87,10 @@ export class department extends Model<departmentAttributes, departmentCreationAt
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'department',

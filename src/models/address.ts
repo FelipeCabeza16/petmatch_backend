@@ -48,91 +48,95 @@ export class address extends Model<addressAttributes, addressCreationAttributes>
 
   static initModel(sequelize: Sequelize.Sequelize): typeof address {
     return address.init({
-    id_address: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    address: {
-      type: DataTypes.STRING(300),
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    neightborhood: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    postal_code: {
-      type: DataTypes.STRING(20),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      defaultValue: 1
-    },
-    user_address: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'user',
-        key: 'id_user'
-      }
-    },
-    city_address: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'city',
-        key: 'id_city'
-      }
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, 
-  
-  
-  {
-    sequelize,
-    tableName: 'address',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_address" },
-        ]
+      id_address: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "fk_address_owner1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "user_address" },
-        ]
+      address: {
+        type: DataTypes.STRING(300),
+        allowNull: false
       },
-      {
-        name: "fk_address_city1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "city_address" },
-        ]
+      description: {
+        type: DataTypes.STRING(500),
+        allowNull: true
       },
-    ]
-  });
+      neightborhood: {
+        type: DataTypes.STRING(200),
+        allowNull: true
+      },
+      postal_code: {
+        type: DataTypes.STRING(20),
+        allowNull: true
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        defaultValue: 1
+      },
+      user_address: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id_user'
+        }
+      },
+      city_address: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'city',
+          key: 'id_city'
+        }
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    },
+
+
+      {
+        sequelize,
+        tableName: 'address',
+        timestamps: false,
+        paranoid: true,
+        indexes: [
+          {
+            name: "PRIMARY",
+            unique: true,
+            using: "BTREE",
+            fields: [
+              { name: "id_address" },
+            ]
+          },
+          {
+            name: "fk_address_owner1_idx",
+            using: "BTREE",
+            fields: [
+              { name: "user_address" },
+            ]
+          },
+          {
+            name: "fk_address_city1_idx",
+            using: "BTREE",
+            fields: [
+              { name: "city_address" },
+            ]
+          },
+        ]
+      });
   }
 }

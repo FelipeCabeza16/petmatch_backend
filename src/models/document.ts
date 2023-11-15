@@ -52,7 +52,8 @@ export class document extends Model<documentAttributes, documentCreationAttribut
     id_document: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     document: {
       type: DataTypes.STRING(100),
@@ -85,6 +86,10 @@ export class document extends Model<documentAttributes, documentCreationAttribut
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+    },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
     },
   }, {
     sequelize,

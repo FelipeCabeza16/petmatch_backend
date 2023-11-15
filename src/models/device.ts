@@ -104,6 +104,10 @@ export class device extends Model<deviceAttributes, deviceCreationAttributes> im
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'device',

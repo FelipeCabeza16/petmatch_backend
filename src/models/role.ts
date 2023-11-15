@@ -82,6 +82,10 @@ export class role extends Model<roleAttributes, roleCreationAttributes> implemen
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'role',

@@ -42,76 +42,80 @@ export class message extends Model<messageAttributes, messageCreationAttributes>
 
   static initModel(sequelize: Sequelize.Sequelize): typeof message {
     return message.init({
-    id_message: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    sender_user: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'user',
-        key: 'id_user'
-      }
-    },
-    message_chat: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'chat',
-        key: 'id_chat'
-      }
-    },
-    message: {
-      type: DataTypes.STRING(800),
-      allowNull: false
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      defaultValue: 1
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'message',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_message" },
-        ]
+      id_message: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "fk_owner_has_chat_chat1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "message_chat" },
-        ]
+      sender_user: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id_user'
+        }
       },
-      {
-        name: "fk_owner_has_chat_owner1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "sender_user" },
-        ]
+      message_chat: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'chat',
+          key: 'id_chat'
+        }
       },
-    ]
-  });
+      message: {
+        type: DataTypes.STRING(800),
+        allowNull: false
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        defaultValue: 1
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    }, {
+      sequelize,
+      tableName: 'message',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_message" },
+          ]
+        },
+        {
+          name: "fk_owner_has_chat_chat1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "message_chat" },
+          ]
+        },
+        {
+          name: "fk_owner_has_chat_owner1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "sender_user" },
+          ]
+        },
+      ]
+    });
   }
 }

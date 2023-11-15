@@ -54,59 +54,63 @@ export class subscription_feature extends Model<subscription_featureAttributes, 
 
   static initModel(sequelize: Sequelize.Sequelize): typeof subscription_feature {
     return subscription_feature.init({
-    id_subscription_feature: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    subscription_feature: {
-      type: DataTypes.STRING(45),
-      allowNull: false,
-      unique: "feature_UNIQUE"
-    },
-    description: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'subscription_feature',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_subscription_feature" },
-        ]
+      id_subscription_feature: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "feature_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "subscription_feature" },
-        ]
+      subscription_feature: {
+        type: DataTypes.STRING(45),
+        allowNull: false,
+        unique: "feature_UNIQUE"
       },
-    ]
-  });
+      description: {
+        type: DataTypes.STRING(500),
+        allowNull: true
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    }, {
+      sequelize,
+      tableName: 'subscription_feature',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_subscription_feature" },
+          ]
+        },
+        {
+          name: "feature_UNIQUE",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "subscription_feature" },
+          ]
+        },
+      ]
+    });
   }
 }

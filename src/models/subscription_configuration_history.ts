@@ -38,69 +38,73 @@ export class subscription_configuration_history extends Model<subscription_confi
 
   static initModel(sequelize: Sequelize.Sequelize): typeof subscription_configuration_history {
     return subscription_configuration_history.init({
-    id_subscription_configuration_history: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    description: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    end_at: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
-    start_at: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    subscription_configuration_subscription_configuration_history: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'subscription_configuration',
-        key: 'id_subscription_configuration'
-      }
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'subscription_configuration_history',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_subscription_configuration_history" },
-        ]
+      id_subscription_configuration_history: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "fk_subscription_configuration_history_subscription_configur_idx",
-        using: "BTREE",
-        fields: [
-          { name: "subscription_configuration_subscription_configuration_history" },
-        ]
+      description: {
+        type: DataTypes.STRING(500),
+        allowNull: true
       },
-    ]
-  });
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      end_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+      start_at: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      subscription_configuration_subscription_configuration_history: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'subscription_configuration',
+          key: 'id_subscription_configuration'
+        }
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    }, {
+      sequelize,
+      tableName: 'subscription_configuration_history',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_subscription_configuration_history" },
+          ]
+        },
+        {
+          name: "fk_subscription_configuration_history_subscription_configur_idx",
+          using: "BTREE",
+          fields: [
+            { name: "subscription_configuration_subscription_configuration_history" },
+          ]
+        },
+      ]
+    });
   }
 }

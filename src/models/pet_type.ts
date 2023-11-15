@@ -71,6 +71,10 @@ export class pet_type extends Model<pet_typeAttributes, pet_typeCreationAttribut
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'pet_type',

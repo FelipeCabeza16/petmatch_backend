@@ -87,6 +87,10 @@ export class breed extends Model<breedAttributes, breedCreationAttributes> imple
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'breed',

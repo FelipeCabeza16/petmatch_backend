@@ -164,119 +164,130 @@ export class user extends Model<userAttributes, userCreationAttributes> implemen
 
   static initModel(sequelize: Sequelize.Sequelize): typeof user {
     return user.init({
-    id_user: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    name: {
-      type: DataTypes.STRING(200),
-      allowNull: false
-    },
-    last_name: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    phone: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
-      unique: "phone_UNIQUE"
-    },
-    password: {
-      type: DataTypes.STRING(200),
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING(500),
-      allowNull: true,
-      unique: "email_UNIQUE"
-    },
-    birthdate: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    role_user: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'role',
-        key: 'id_role'
-      }
-    },
-    subscription_user: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'subscription',
-        key: 'id_subscription'
-      }
-    },
-    document_user: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'document',
-        key: 'id_document'
-      }
-    }
-  }, {
-    sequelize,
-    tableName: 'user',
-    timestamps: true,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_user" },
-        ]
+      id_user: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "phone_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "phone" },
-        ]
+      name: {
+        type: DataTypes.STRING(200),
+        allowNull: false
       },
-      {
-        name: "email_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "email" },
-        ]
+      last_name: {
+        type: DataTypes.STRING(200),
+        allowNull: true
       },
-      {
-        name: "fk_owner_role1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "role_user" },
-        ]
+      phone: {
+        type: DataTypes.STRING(20),
+        allowNull: true,
+        unique: "phone_UNIQUE"
       },
-      {
-        name: "fk_owner_subscription1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "subscription_user" },
-        ]
+      password: {
+        type: DataTypes.STRING(200),
+        allowNull: false
       },
-      {
-        name: "fk_user_document1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "document_user" },
-        ]
+      email: {
+        type: DataTypes.STRING(500),
+        allowNull: true,
+        unique: "email_UNIQUE"
       },
-    ]
-  });
+      birthdate: {
+        type: DataTypes.DATEONLY,
+        allowNull: true
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      role_user: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'role',
+          key: 'id_role'
+        }
+      },
+      subscription_user: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'subscription',
+          key: 'id_subscription'
+        }
+      },
+      document_user: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'document',
+          key: 'id_document'
+        }
+      },
+      created_at: {
+        type: DataTypes.DATE,
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },      
+
+    }, {
+      sequelize,
+      tableName: 'user',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_user" },
+          ]
+        },
+        {
+          name: "phone_UNIQUE",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "phone" },
+          ]
+        },
+        {
+          name: "email_UNIQUE",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "email" },
+          ]
+        },
+        {
+          name: "fk_owner_role1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "role_user" },
+          ]
+        },
+        {
+          name: "fk_owner_subscription1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "subscription_user" },
+          ]
+        },
+        {
+          name: "fk_user_document1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "document_user" },
+          ]
+        },
+      ]
+    });
   }
 }

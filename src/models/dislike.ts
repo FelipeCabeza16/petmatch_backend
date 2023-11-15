@@ -39,74 +39,78 @@ export class dislike extends Model<dislikeAttributes, dislikeCreationAttributes>
 
   static initModel(sequelize: Sequelize.Sequelize): typeof dislike {
     return dislike.init({
-    id_dislike: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    from_pet: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'pet',
-        key: 'id_pet'
-      }
-    },
-    to_pet: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'pet',
-        key: 'id_pet'
-      }
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      defaultValue: 1
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, 
-  
-  {
-    sequelize,
-    tableName: 'dislike',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_dislike" },
-        ]
+      id_dislike: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "fk_pet_has_pet_pet4_idx",
-        using: "BTREE",
-        fields: [
-          { name: "to_pet" },
-        ]
+      from_pet: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'pet',
+          key: 'id_pet'
+        }
       },
-      {
-        name: "fk_pet_has_pet_pet3_idx",
-        using: "BTREE",
-        fields: [
-          { name: "from_pet" },
-        ]
+      to_pet: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'pet',
+          key: 'id_pet'
+        }
       },
-    ]
-  });
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        defaultValue: 1
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    },
+
+      {
+        sequelize,
+        tableName: 'dislike',
+        timestamps: false,
+        paranoid: true,
+        indexes: [
+          {
+            name: "PRIMARY",
+            unique: true,
+            using: "BTREE",
+            fields: [
+              { name: "id_dislike" },
+            ]
+          },
+          {
+            name: "fk_pet_has_pet_pet4_idx",
+            using: "BTREE",
+            fields: [
+              { name: "to_pet" },
+            ]
+          },
+          {
+            name: "fk_pet_has_pet_pet3_idx",
+            using: "BTREE",
+            fields: [
+              { name: "from_pet" },
+            ]
+          },
+        ]
+      });
   }
 }

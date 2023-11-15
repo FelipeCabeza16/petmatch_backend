@@ -48,85 +48,89 @@ export class operation extends Model<operationAttributes, operationCreationAttri
 
   static initModel(sequelize: Sequelize.Sequelize): typeof operation {
     return operation.init({
-    id_operation: {
-      type: DataTypes.STRING(45),
-      allowNull: false,
-      primaryKey: true
-    },
-    role_operation: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'role',
-        key: 'id_role'
-      }
-    },
-    modulo_operation: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'modulo',
-        key: 'id_modulo'
-      }
-    },
-    permission_operation: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'permission',
-        key: 'id_permission'
-      }
-    },
-    is_active: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'operation',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_operation" },
-        ]
+      id_operation: {
+        type: DataTypes.STRING(45),
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "fk_role_has_modulo_modulo1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "modulo_operation" },
-        ]
+      role_operation: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'role',
+          key: 'id_role'
+        }
       },
-      {
-        name: "fk_role_has_modulo_role1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "role_operation" },
-        ]
+      modulo_operation: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'modulo',
+          key: 'id_modulo'
+        }
       },
-      {
-        name: "fk_operation_permission1_idx",
-        using: "BTREE",
-        fields: [
-          { name: "permission_operation" },
-        ]
+      permission_operation: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'permission',
+          key: 'id_permission'
+        }
       },
-    ]
-  });
+      is_active: {
+        type: DataTypes.STRING(45),
+        allowNull: true
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    }, {
+      sequelize,
+      tableName: 'operation',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_operation" },
+          ]
+        },
+        {
+          name: "fk_role_has_modulo_modulo1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "modulo_operation" },
+          ]
+        },
+        {
+          name: "fk_role_has_modulo_role1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "role_operation" },
+          ]
+        },
+        {
+          name: "fk_operation_permission1_idx",
+          using: "BTREE",
+          fields: [
+            { name: "permission_operation" },
+          ]
+        },
+      ]
+    });
   }
 }

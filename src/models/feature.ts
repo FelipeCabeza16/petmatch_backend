@@ -54,61 +54,65 @@ export class feature extends Model<featureAttributes, featureCreationAttributes>
 
   static initModel(sequelize: Sequelize.Sequelize): typeof feature {
     return feature.init({
-    id_feature: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    feature: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      unique: "breed_UNIQUE"
-    },
-    description: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, 
-  
-  
-  {
-    sequelize,
-    tableName: 'feature',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_feature" },
-        ]
+      id_feature: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-      {
-        name: "breed_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "feature" },
-        ]
+      feature: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: "breed_UNIQUE"
       },
-    ]
-  });
+      description: {
+        type: DataTypes.STRING(45),
+        allowNull: true
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+    },
+
+
+      {
+        sequelize,
+        tableName: 'feature',
+        timestamps: false,
+        paranoid: true,
+        indexes: [
+          {
+            name: "PRIMARY",
+            unique: true,
+            using: "BTREE",
+            fields: [
+              { name: "id_feature" },
+            ]
+          },
+          {
+            name: "breed_UNIQUE",
+            unique: true,
+            using: "BTREE",
+            fields: [
+              { name: "feature" },
+            ]
+          },
+        ]
+      });
   }
 }

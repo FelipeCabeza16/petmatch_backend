@@ -9,6 +9,7 @@ import { getFieldNameToSpanish } from "../../helpers/user";
 
 export const errorHandlerUserRegister = (err: any, res: Response): Response => {
 
+    console.log(err)
     if (err) {
         if (err.name && err.name === 'SequelizeUniqueConstraintError') {
             const pathName = getFieldNameToSpanish(err.errors[0].path);

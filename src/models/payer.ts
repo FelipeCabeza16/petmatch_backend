@@ -82,6 +82,10 @@ export class payer extends Model<payerAttributes, payerCreationAttributes> imple
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
+deleted_at: {
+      type: DataTypes.DATE,
+allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'payer',

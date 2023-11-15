@@ -43,72 +43,76 @@ export class document_type extends Model<document_typeAttributes, document_typeC
 
   static initModel(sequelize: Sequelize.Sequelize): typeof document_type {
     return document_type.init({
-    id_document_type: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    document_type: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      unique: "breed_UNIQUE"
-    },
-    description: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      defaultValue: 1
-    },
-    abbreviate: {
-      type: DataTypes.STRING(10),
-      allowNull: false,
-      unique: "abbreviate_UNIQUE"
-    },
+      id_document_type: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
+      },
+      document_type: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: "breed_UNIQUE"
+      },
+      description: {
+        type: DataTypes.STRING(45),
+        allowNull: true
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1
+      },
+      abbreviate: {
+        type: DataTypes.STRING(10),
+        allowNull: false,
+        unique: "abbreviate_UNIQUE"
+      },
 
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-  }, {
-    sequelize,
-    tableName: 'document_type',
-    timestamps: false,
-    paranoid: true,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_document_type" },
-        ]
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
       },
-      {
-        name: "breed_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "document_type" },
-        ]
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
       },
-      {
-        name: "abbreviate_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "abbreviate" },
-        ]
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
       },
-    ]
-  });
+    }, {
+      sequelize,
+      tableName: 'document_type',
+      timestamps: false,
+      paranoid: true,
+      indexes: [
+        {
+          name: "PRIMARY",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "id_document_type" },
+          ]
+        },
+        {
+          name: "breed_UNIQUE",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "document_type" },
+          ]
+        },
+        {
+          name: "abbreviate_UNIQUE",
+          unique: true,
+          using: "BTREE",
+          fields: [
+            { name: "abbreviate" },
+          ]
+        },
+      ]
+    });
   }
 }
