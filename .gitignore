@@ -1,0 +1,11 @@
+#Ignore Node Modules
+node_modules/
+dist/
+src/config/
+.env
+coverage
+jest.config.js
+./logs/
+/logs/
+/logs/.*
+!/logs/.*
